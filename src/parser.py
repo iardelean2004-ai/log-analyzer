@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 from dataclasses import dataclass
 from typing import Optional
+from typing import Iterator
 LOG_PATTERN = re.compile(
     r'(?P<ip>\S+) \S+ \S+ '
     r'\[(?P<time>[^\]]+)\] '
@@ -29,9 +30,13 @@ def parse_line(line:str) -> Optional [LogEntry]:
         status=int(d["status"]),
         size=0 if d["size"] == "-" else int (d["size"]),
     )
-linie = '192.168.1.10 - - [01/Oct/2026:00:00:42 +0000] "GET /login HTTP/1.1" 404 3127'
-print(parse_line(linie))
-print(parse_line("linie stricata"))
+def parse_line(path:str) -> Iterator[LogEntry]:
+    with open(path) as f:
+        for line in f:
+            entry= parse_line(line)
+            if entry:
+                yield entry
+                
 
 
 
