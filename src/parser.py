@@ -36,7 +36,10 @@ def parse_file(path:str) -> Iterator[LogEntry]:
             entry= parse_line(line)
             if entry:
                 yield entry
-                
+entries= list(parse_file("data/access.log"))
+print(len(entries))
+print(entries[0])
+
 
 
 
