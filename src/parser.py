@@ -30,7 +30,7 @@ def parse_line(line:str) -> Optional [LogEntry]:
         status=int(d["status"]),
         size=0 if d["size"] == "-" else int (d["size"]),
     )
-def parse_line(path:str) -> Iterator[LogEntry]:
+def parse_file(path:str) -> Iterator[LogEntry]:
     with open(path) as f:
         for line in f:
             entry= parse_line(line)
