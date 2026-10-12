@@ -19,7 +19,3 @@ def requests_per_hour(path):
     for entry in parse_file(path):
         counter[entry.time.hour]+=1
     return sorted (counter.items())
-print(requests_per_hour("data/access.log"))
-print(top_ips("data/access.log"))
-print(f"{error_rate('data/access.log'): .1%}")
-
